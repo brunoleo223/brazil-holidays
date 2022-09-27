@@ -2,7 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function Home({holidays}) {
+  console.log(holidays)
   return (
     <div className={styles.container}>
       <Head>
@@ -66,4 +67,17 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+export async function getStaticProps(){
+  const year = new Date().getFullYear();
+  const holidays = await fetch(`https://brasilapi.com.br/api/feriados/v1/${year}`);
+  const holidaysInJson = await holidays.json()
+
+  return {
+    props: {
+      holidays: holidaysInJson
+    }
+  }
+
 }
