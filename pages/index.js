@@ -7,7 +7,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 
-export default function Home({holidays}) {
+export default function Home({holidays, random}) {
   const today = new Date();
   function findClosestHoliday() {
     const closest = holidays.reduce((prev, curr) => {
@@ -23,16 +23,13 @@ export default function Home({holidays}) {
   const nextHolidayTZ = zonedTimeToUtc( closestHoliday.date, 'America/Sao_Paulo');
   const date = format(new Date(`${nextHolidayTZ}`), 'PPPP', {locale: ptBR})
   const nextHoliday = formatDistanceToNow(new Date(nextHolidayTZ), {locale: ptBR});
-
-  let random = Math.floor(Math.random() * 8) + 1;
-  const [classNumber] = useState(random);
     
   return (
     <>
       <div className="logo">
         <Image src="/logo.svg"  alt="" width={500} height={331} />
       </div>
-      <div className={`content g${classNumber}`}>
+      <div className={`content g${random}`}>
         <Head>
           <title>Feriados Brasil</title>
         </Head>
@@ -59,10 +56,13 @@ export async function getStaticProps(){
   const year = new Date().getFullYear();
   const holidays = await fetch(`https://brasilapi.com.br/api/feriados/v1/${year}`);
   const holidaysInJson = await holidays.json()
+
+  const random = Math.floor(Math.random() * 8) + 1;
   
   return {
     props: {
-      holidays: holidaysInJson
+      holidays: holidaysInJson,
+      random
     }
   }
   

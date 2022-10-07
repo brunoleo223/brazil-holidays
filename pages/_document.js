@@ -5,7 +5,7 @@ export default function Document() {
     <Html>
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin={true} />
         <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=BioRhyme+Expanded:wght@700&family=Monoton&family=Orbitron:wght@700&family=Press+Start+2P&family=Shadows+Into+Light&family=Squada+One&family=Teko:wght@600&display=swap" rel="stylesheet" />
         <meta name="description" content="Veja quanto tempo falta para o próximo feriado nacional" />
         <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
