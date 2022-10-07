@@ -1,28 +1,29 @@
 .card {
-  margin: 1rem;
-  padding: 1.5rem;
+  padding: 2.5rem 4rem;
   text-align: center;
-  color: #fff;
-  border: 1px solid #222;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 400px;
-  aspect-ratio: 1/1;
+  color: #000;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  background-color: #fff;
 }
-
 
 .card .holiday{
-  font-size: 40px;
+  font-size: 35px;
+  margin: 0;
+  margin-bottom: 20px;
 }
 
-.card .phrase{
-  font-size: 40px;
+.card .holiday b{
+  border-bottom: 3px solid rgb(255, 0, 170);
 }
 
 .card .distance{
-  font-size: 80px;
+  font-size: 60px;
+  margin: 0;
+  margin-top: 20px;
+  color: rgb(255, 0, 170);
 }
