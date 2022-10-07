@@ -27,7 +27,7 @@ export default function Home({holidays}) {
   setInterval(() => {
     random = (Math.floor(Math.random() * 8) + 1) ;
     setClassNumber(random);
-  }, 30000)
+  }, 60000)
     
   return (
     <div className={`content g${classNumber}`}>
@@ -39,12 +39,14 @@ export default function Home({holidays}) {
 
       <div className={styles.bg}>
         <div className={styles.card}>
-          <p className={styles.holiday}>O próximoferiado será o de <b>{closestHoliday.name}</b>, e será</p>
-          <h1 className={styles.distance}>{nextHoliday ? `em ${nextHoliday}` : 'amanhã'}</h1>
+          <p className={styles.holiday}>O próximo feriado será o de</p>
+          <p className={styles.holiday}><b>{closestHoliday.name}</b></p>
         </div>
       </div>
 
-      <div className="bg-image"></div>
+      <div className="bg-image">
+        <h1 className={styles.distance}>{nextHoliday ? `em ${nextHoliday}` : 'amanhã'}</h1>
+      </div>
     </div>
   )
 }
