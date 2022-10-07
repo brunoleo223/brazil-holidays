@@ -3,11 +3,11 @@ import { formatDistanceToNow, format } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 import ptBR from 'date-fns/locale/pt-BR';
 import styles from '../styles/Home.module.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 
-export default function Home({holidays, random}) {
+export default function Home({holidays}) {
   const today = new Date();
   function findClosestHoliday() {
     const closest = holidays.reduce((prev, curr) => {
@@ -23,13 +23,20 @@ export default function Home({holidays, random}) {
   const nextHolidayTZ = zonedTimeToUtc( closestHoliday.date, 'America/Sao_Paulo');
   const date = format(new Date(`${nextHolidayTZ}`), 'PPPP', {locale: ptBR})
   const nextHoliday = formatDistanceToNow(new Date(nextHolidayTZ), {locale: ptBR});
+
+  const [classNumber, setClassNumber] = useState(0);
+  
+  useEffect(() => {
+    const random = Math.floor(Math.random() * 8) + 1;
+    setClassNumber(random);
+  }, [])
     
   return (
     <>
       <div className="logo">
         <Image src="/logo.svg"  alt="" width={500} height={331} />
       </div>
-      <div className={`content g${random}`}>
+      <div className={`content g${classNumber}`}>
         <Head>
           <title>Feriados Brasil</title>
         </Head>
@@ -56,13 +63,10 @@ export async function getStaticProps(){
   const year = new Date().getFullYear();
   const holidays = await fetch(`https://brasilapi.com.br/api/feriados/v1/${year}`);
   const holidaysInJson = await holidays.json()
-
-  const random = Math.floor(Math.random() * 8) + 1;
   
   return {
     props: {
-      holidays: holidaysInJson,
-      random
+      holidays: holidaysInJson
     }
   }
   
