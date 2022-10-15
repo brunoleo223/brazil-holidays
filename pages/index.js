@@ -9,12 +9,10 @@ import Image from 'next/image';
 
 export default function Home({holidays}) {
   const today = new Date();
+  //find the next holiday
   function findClosestHoliday() {
-    const closest = holidays.reduce((prev, curr) => {
-      const prevDate = new Date(prev.date);
-      const currDate = new Date(curr.date);
-      return (Math.abs(currDate - today) < Math.abs(prevDate - today) ? curr : prev);
-    });
+    const closest = holidays.find(holiday => new Date(holiday.date) > today);
+    
     return closest;
   }
 
